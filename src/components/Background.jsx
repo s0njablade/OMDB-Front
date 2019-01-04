@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 
-class Background extends React.Component {
 
-    render() {
-        return (
-            <div className="Background">
+const Background = (props) => {
+    return (
+        <div className="Background">
 
-            </div>
-        )
-    }
+        </div>
+    )
 }
-export default Background;
+
+export default Background
