@@ -2,10 +2,11 @@ import React from 'react'
 import EditPage from './EditPage'
 
 const Movies = (props) => {
-    return(
+    return (
         <div className='movie'>
             <div className="editButton">
-                <button>Edit Movie</button>
+
+                {/* <button>Edit Movie</button> */}
             </div>
         </div>
     )

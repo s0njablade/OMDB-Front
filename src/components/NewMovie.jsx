@@ -1,6 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 
 const NewMovie =(props) =>{
+
+
     return(
         <div className='newForm'>
             <form>
@@ -38,6 +42,9 @@ const NewMovie =(props) =>{
                     <button className='submit' onClick={props.submit}>Submit</button>
                 </div>
             </form>
+            <Link to='/MovieList'>
+                    <button className='back'>Back</button>
+            </Link>
         </div>
     )
 }
