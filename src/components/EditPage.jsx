@@ -1,42 +1,48 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import MovieList from './MovieList'
 
-const EditPage = (props) =>{
-    return(
-        <div className='editForm'>
+const EditPage = (props) => {
+
+    console.log(props)
+
+    // let editInfo = props.movies.map((movie,index) =>{
+    //     return (<EditPage key={index} eMovie={eMovie}/>)
+    // })
+
+    return (
+
+        <div>
+            {this.props.eMovie}
             <form>
-                <div class="form-group row">
-                    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Title</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-sm" id="colFormLabelSm" placeholder="col-form-label-sm"></input>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="colFormLabel" class="col-sm-2 col-form-label">Director</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" id="colFormLabel" placeholder="col-form-label"></input>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="colFormLabel" class="col-sm-2 col-form-label">Year</label>
-                    <div class="col-sm-6">
-                        <input type="number" class="form-control" id="colFormLabel" placeholder="col-form-label"></input>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="colFormLabel" class="col-sm-2 col-form-label">My Rating</label>
-                    <div class="col-sm-6">
-                        <input type="number" class="form-control" id="colFormLabel" placeholder="col-form-label"></input>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="colFormLabel" class="col-sm-2 col-form-label">Poster URL</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" id="colFormLabel" placeholder="col-form-label"></input>
-                    </div>
-                </div>
+                {/* <input type="text" placeholder="movie name" onChange={this.handleNameInput} />
+                <input type="text" placeholder="director" onChange={this.handleDirectorInput} />
+                <input type="text" placeholder="year" onChange={this.handleYearInput} />
+                <input type="text" placeholder="rating" onChange={this.handleRatingInput} /> */}
+                <button onClick={this.handleESubmit} type="submit">Submit!!!</button>
+
             </form>
         </div>
     )
 }
+
+
+//         <table className='editMovie'>
+//             <thead className='editMovieHeader'>
+//                 <tr>
+//                     <th>Title</th>
+//                     <th>Poster</th>
+//                     <th>Director</th>
+//                     <th>Year</th>
+//                     <th>Rating</th>
+//                 </tr>
+//             </thead>
+//             <tbody className='selectedMovie'>
+//                 {props.eMovie}
+//                 {props.deleteHandler}
+//             </tbody>
+//         </table>
+//     )
+// }
 
 export default EditPage

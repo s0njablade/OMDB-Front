@@ -4,6 +4,7 @@ import Home from './components/Home'
 import Navbar from './components/Navbar'
 import MovieList from './components/MovieList'
 import NewMovie from './components/NewMovie'
+import EditPage from './components/EditPage'
 import { Route, BrowserRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
@@ -13,13 +14,14 @@ class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            id: 0,
+            id: [],
             movies: [],
             title: '',
             director: '',
             year: 0,
             rating: 0,
-            poster: ''
+            poster: '',
+            editMovie:[]
         }
     }
 
@@ -30,101 +32,100 @@ class App extends Component {
         console.log('movies', this.state.movies)
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault()
-        fetch('https://omdb-son.herokuapp.com/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application-json',
-            },
-            body: JSON.stringify({
-                movies: this.state.title,
-                director: this.state.director,
-                year: this.state.year,
-                my_rating: this.state.rating,
-                poster_URL: this.state.poster
+    selectMovie = (e) => {
+      console.log('editMovie', e.target.id)
+      fetch(`https://omdb-son.herokuapp.com/${e.target.id}`)
+          .then(result => result.json())
+          .then((response) => {
+              this.setState({
+                  editMovie: [response]
+              })
+          })
+      console.log('edit movies', this.state.editMovie)
+  }
+
+
+  handleESubmit = (event) => {
+    event.preventDefault()
+    fetch(`https://movies-project-maf.herokuapp.com/${this.props.editMovie}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+            title: this.state.title,
+            director: this.state.director,
+            year: this.state.year,
+            my_rating: this.state.rating,
+            poster_url: this.state.poster
             })
         })
-            .then(response => console.log(response))
+        console.log("you submit the PUT request")
+}
+
+    handleNameInput = (e) => {
+      console.log(e.target.value)
+      this.setState({
+          title: e.target.value
+        })
     }
 
-    editMovie = (e) => {
-        let id = e.target.id
-        console.log('editButton', this.state.editMovie)
+    handleDirectorInput = (e) => {
+      console.log(e.target.value)
+      this.setState({
+          director: e.target.value
+        })
     }
 
-    // deleteHandler = (i, e) => {
-    //   e.preventDefault()
-    //   this.state.onDelete(this.state.movies[i].id)
-    // fetch('https://omdb-son.herokuapp.com/', {
-    //   method: 'DELETE',
-    //   headers: {
-    //     'Content-Type': 'application-json',
-    //   },
-    //   body: JSON.stringify({
-    //     id: this.state.id,
-    //     movies: this.state.title,
-    //     director: this.state.director,
-    //     year: this.state.year,
-    //     my_rating: this.state.rating,
-    //     poster_URL: this.state.poster
-    //   })
-    //   })
-    //   .then(response => console.log(response))
-    //   .then(res => res)
-    //   .then(err => err)
-    // }
+    handleYearInput = (e) => {
+      console.log(e.target.value)
+      this.setState({
+          year: e.target.value
+        })
+    }
 
-    // let movie = this.state.movies.filter((movie) => {
-    //   return id !== movie.id
-    // })
-    // this.setState(state => {
-    //   state.movies = movies
-    //   return state
-    // })
-
-    // onDelete(id) {
-    //   deleteHandler(id)
-    //   .then((movies) => {
-    //     let movies = this.state.movies.filter((movie) => {
-    //       return id !==movie.id
-    //     })
-    //     this.setState (state => {
-    //       state.movies = movies
-    //       return state
-    //     })
-    //   })
-    // }
+    handleRatingInput = (e) => {
+      console.log(e.target.value)
+      this.setState({
+          rating: e.target.value
+        })
+    }
 
     render() {
         let allMovies = this.state.movies.map(movies =>
-            <table className='table table-hover table-dark table-border'>
-              <thead>
-                <tr>
-                  <th scope='col'>Title</th>
-                  <th scope='col'>Director</th>
-                  <th scope='col'>Year</th>
-                  <th scope='col'>Rating</th>
-                  <th scope='col'>Poster</th>
-                </tr>
-              </thead>
-              <tbody className='table-striped-dark'>
-                <tr scope="row col-span-1" className="movieTable">
+            <table className='table'>
+                <tr key={movies.id}className="movieTable">
                     <td>{movies.title}</td>
                     <td>{movies.director}</td>
                     <td>{movies.year}</td>
                     <td>{movies.my_rating}</td>
                     <td><img className='img' src={movies.poster_URL} /></td>
                     <Link to='/EditPage'>
-                        <button onClick={this.editMovie}>Edit</button>
+                      <td><button className='edit' id={movies.id} onClick={this.selectMovie} >Edit</button></td>
                     </Link>
                     {/* <td><button onClick={() => this.deleteHandler(i)}>Delete</button></td> */}
                 </tr>
-              </tbody>
             </table>
         )
 
         // onDelete={this.onDelete.bind(this)}
+
+        const editMovie = this.state.editMovie.map(movie => 
+          <table className='editTable'>
+            <tr key={movie.id}>
+              <td>{movie.title}</td> 
+              <td><img className="img" src={movie.poster_URL}/></td>
+              <td>Director: {movie.director}</td>
+              <td>Year Made: {movie.year}</td>
+              <td>My Rating: {movie.my_rating}</td>
+              <td>
+                <Link to="/MovieList">
+                    <button className="back-button">Back</button>
+                </Link>
+              </td>
+              </tr>
+          </table>
+      ) 
 
         return (
 
@@ -133,7 +134,7 @@ class App extends Component {
                 <Route exact path='/' component={Home}/>
                 <Route path='/NewMovie' component={NewMovie} />
                 <Route path='/MovieList' render={() => <MovieList allMovies={allMovies} />} />
-                <Route path='/SubmitNewMovie' render={() => <NewMovie />} />
+                <Route path='/EditPage' render={() => <EditPage handleESubmit={this.handleESubmit} eMovie={editMovie}/>} />
             </div>
 
         )
@@ -141,4 +142,3 @@ class App extends Component {
 }
 
 export default App
-// submit={this.handleSubmit}
