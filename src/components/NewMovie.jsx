@@ -2,42 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 
-class NewMovie extends Component {
-    
-    constructor(props) {
-        super(props)
-        this.state = {
-            id: [],
-            movies: [],
-            title: '',
-            director: '',
-            year: 0,
-            rating: 0,
-            poster: ''
-        }
-    }
+const NewMovie = (props) => {
 
-    handleSubmit = (e) => {
-        console.log("testing the submit button!!!!!!")
-        e.preventDefault()
-        fetch('https://omdb-son.herokuapp.com/', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                movies: this.state.title,
-                director: this.state.director,
-                year: this.state.year,
-                my_rating: this.state.rating,
-                poster_URL: this.state.poster
-            })
-        })
-        console.log('thank you!')
-    }
-
-
-    render() {
 
         return (
             <div className='newForm'>
@@ -73,9 +39,8 @@ class NewMovie extends Component {
                         </div>
                     </div>
                     <div>
-                        <Link to='/MovieList' >
-                            <button className='submit' onClick={this.handleSubmit}>Submit</button>
-                        </Link>
+                            <button className='submit' onClick={props.handleSubmit}>Submit</button>
+                        
                     </div>
                 </form>
                 <Link to='/MovieList'>
@@ -84,5 +49,5 @@ class NewMovie extends Component {
             </div>
         )
     }
-}
+
 export default NewMovie

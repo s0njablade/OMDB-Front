@@ -1,48 +1,32 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import MovieList from './MovieList'
 
 const EditPage = (props) => {
 
     console.log(props)
 
-    // let editInfo = props.movies.map((movie,index) =>{
-    //     return (<EditPage key={index} eMovie={eMovie}/>)
-    // })
-
     return (
+        props.editLoaded && props.editMovie.map(movie => {
+            return (
+                < div >
+                    <form>
+                        <input className='' name='editTitle' defaultValue={movie.title} onChange={props.handleChange}></input>
+                        <input className='' name='editDirector' defaultValue={movie.director} onChange={props.handleChange}></input>
+                        <input className='' name='editYear' defaultValue={movie.year} onChange={props.handleChange}></input>
+                        <input className='' name='editRating' defaultValue={movie.my_rating} onChange={props.handleChange}></input>
+                        <input className='' name='editPoster' defaultValue={movie.poster_URL} onChange={props.handleChange}></input>
+                        <button onClick={props.handleESubmit}>Submit</button>
+                        <Link to='/MovieList'>
+                            <button>Back</button>
+                        </Link>
 
-        <div>
-            {this.props.eMovie}
-            <form>
-                {/* <input type="text" placeholder="movie name" onChange={this.handleNameInput} />
-                <input type="text" placeholder="director" onChange={this.handleDirectorInput} />
-                <input type="text" placeholder="year" onChange={this.handleYearInput} />
-                <input type="text" placeholder="rating" onChange={this.handleRatingInput} /> */}
-                <button onClick={this.handleESubmit} type="submit">Submit!!!</button>
-
-            </form>
-        </div>
+                    </form>
+                </div >
+            )
+        })
     )
 }
 
 
-//         <table className='editMovie'>
-//             <thead className='editMovieHeader'>
-//                 <tr>
-//                     <th>Title</th>
-//                     <th>Poster</th>
-//                     <th>Director</th>
-//                     <th>Year</th>
-//                     <th>Rating</th>
-//                 </tr>
-//             </thead>
-//             <tbody className='selectedMovie'>
-//                 {props.eMovie}
-//                 {props.deleteHandler}
-//             </tbody>
-//         </table>
-//     )
-// }
 
 export default EditPage
