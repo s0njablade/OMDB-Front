@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 class MovieList extends Component {
 
     render() {
-
         let list = this.props.allMovies.map(movies => {
             return (
                 <div key={movies.id} className='movieTable'>
@@ -18,16 +17,12 @@ class MovieList extends Component {
                     <Link to='/EditPage'>
                         <button className='edit' id={movies.id} onClick={this.props.selectMovie}>Edit</button>
                     </Link>
-
-                    {/* <div><button onClick={() => this.deleteHandler(i)}>Delete</button></td> */}
+                    <button className='delete' id={movies.id} onClick={this.props.deleteMovie}>Delete</button>
                 </div>
-
             )
         })
 
-
         return (
-
         <div className='otherBg'>
             <div className='tableList'>
                 {list}
@@ -36,5 +31,4 @@ class MovieList extends Component {
         )
     }
 }
-
 export default MovieList 

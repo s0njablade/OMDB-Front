@@ -46,33 +46,10 @@
   min-height: 100vh;
 }
 
-/* .otherBgOverlay{
-  position: absolute;
-  top: 50%;
-  bottom: 50%;
-  width: auto;
-  height: 100vh;
-  z-index: -5;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-evenly;
-  margin-top: 5px;
-} */
-
-/* .container {
-  display: flex;
-  flex-flow: column;
-  justify-content: space-evenly;
-  margin-top: 5px;
-} */
-
-
 .img {
   height: 50px;
   width: 35px
 }
-
-
 
 .edit {
   display: flex;
@@ -91,15 +68,37 @@
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
+.delete {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  text-align: center;
+  text-decoration: none;
+  /* margin: 4px 2px; */
+  height: 30px;
+}
+
+.delete:hover {
+  background-color: #555555;
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
 /* New Movie Form */
 
 .newForm {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  /* width: 100%; */
+  width: 50%;
   border: solid white 1px;
   background-color: rgba(255, 255, 255, 0.5)
+}
+
+.form-group {
+  padding-top: 3%;
 }
 
 .submit {
@@ -132,6 +131,69 @@
 }
 
 .back:hover {
+  background-color: #555555;
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Edit form */
+
+input {
+  display: flex;
+  flex-direction: column;
+  margin-top: 13%
+}
+
+.imgEdit {
+  height: 350px;
+  width: 200px;
+  /* margin-left: 165px */
+}
+
+.addMovie {
+  display: flex;
+  flex-direction: column;
+  margin-top: 13%;
+  justify-content: space-evenly;
+  width: 60%;
+  /* height: 30vh; */
+  border: solid white 1px;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin-left: 40px;
+  padding: 5%;
+}
+
+.addInfo{
+  display: flex;
+  justify-content: center
+}
+
+.posterForm {
+  display: flex;
+  flex-direction: row;
+  padding-top: 5%
+}
+
+.editBack{
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  text-align: center;
+  text-decoration: none;
+}
+
+.editBack:hover{
+  background-color: #555555;
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.submitBack {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  text-align: center;
+  text-decoration: none;
+}
+.submitBack:hover{
   background-color: #555555;
   color: white;
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
