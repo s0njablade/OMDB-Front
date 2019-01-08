@@ -10,6 +10,7 @@ const EditPage = (props) => {
             return (
                 < div >
                     <form>
+                        <img className='img' src={movie.poster_URL}></img>
                         <input className='' name='editTitle' defaultValue={movie.title} onChange={props.handleChange}></input>
                         <input className='' name='editDirector' defaultValue={movie.director} onChange={props.handleChange}></input>
                         <input className='' name='editYear' defaultValue={movie.year} onChange={props.handleChange}></input>

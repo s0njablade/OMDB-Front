@@ -6,7 +6,8 @@ const NewMovie = (props) => {
 
 
         return (
-            <div className='newForm'>
+            <div className='newMovie otherBg'>
+            <div className="newForm">
                 <form >
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label col-form-label-sm">Title</label>
@@ -42,10 +43,12 @@ const NewMovie = (props) => {
                             <button className='submit' onClick={props.handleSubmit}>Submit</button>
                         
                     </div>
+                    <Link to='/MovieList'>
+                        <button className='back'>Back</button>
+                    </Link>
                 </form>
-                <Link to='/MovieList'>
-                    <button className='back'>Back</button>
-                </Link>
+                </div>
+                
             </div>
         )
     }
