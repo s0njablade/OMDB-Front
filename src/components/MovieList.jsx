@@ -9,15 +9,15 @@ class MovieList extends Component {
         let list = this.props.allMovies.map(movies => {
             return (
                 <div key={movies.id} className='movieTable'>
-                    <div>{movies.title}</div>
-                    <div>{movies.director}</div>
-                    <div>{movies.year}</div>
-                    <div>{movies.my_rating}</div>
-                    <div><img className='img' src={movies.poster_URL} /></div>
+                    <div className='tableRow'>{movies.title}</div>
+                    <div className='tableRow'>{movies.director}</div>
+                    <div className='tableRow'>{movies.year}</div>
+                    <div className='tableRow'>{movies.my_rating}</div>
+                    <div className='tableRow'><img className='img' src={movies.poster_URL} /></div>
                     <Link to='/EditPage'>
-                        <button className='edit' id={movies.id} onClick={this.props.selectMovie}>Edit</button>
+                        <button className='tableRow edit' id={movies.id} onClick={this.props.selectMovie}>Edit</button>
                     </Link>
-                    <button className='delete' id={movies.id} onClick={this.props.deleteMovie}>Delete</button>
+                    <button className='tableRow delete' id={movies.id} onClick={this.props.deleteMovie}>Delete</button>
                 </div>
             )
         })

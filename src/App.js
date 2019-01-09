@@ -14,20 +14,19 @@ class App extends Component {
   constructor(props) {
       super(props)
       this.state = {
-        id: [],
+        id: 0,
         movies: [],
         title: '',
         director: '',
         year: 0,
         rating: 0,
         poster: '',
-        editMovie:[],
+        editMovie: [],
         editTitle: '',
         editDirector: '',
         editYear: 0,
         editRating: 0,
         editPoster: '',
-        newMovie:[],
         newTitle: '',
         newDirector: '',
         newYear: 0,
@@ -49,23 +48,34 @@ class App extends Component {
   }
 
   handleSubmit = (e) => {
-    console.log("testing the submit button!!!!!!")
     e.preventDefault()
+    console.log("testing the submit button!!!!!!")
+    let newMovie = {
+      title: this.state.newTitle,
+      director: this.state.newDirector,
+      year: this.state.newYear,
+      my_rating: this.state.newRating,
+      poster_URL: this.state.newPoster,
+    }
     fetch('https://omdb-son.herokuapp.com/', {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-            movies: this.state.title,
-            director: this.state.director,
-            year: this.state.year,
-            my_rating: this.state.rating,
-            poster_URL: this.state.poster
-        })
+        method: "POST",
+        headers: new Headers({
+            "content-type": "application/json",
+        }),
+        body: JSON.stringify(newMovie)
     })
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          title: '',
+          director: '',
+          year: undefined,
+          rating: undefined,
+          url: ''
+        })
     console.log('thank you!')
-}
+      })
+  }
 
   selectMovie = (e) => {
     this.setState({ editLoaded: false })
@@ -75,6 +85,7 @@ class App extends Component {
       .then((response) => {
         this.setState({
           editMovie: [response],
+          id: response.id,
           editTitle: response.title, 
           editDirector: response.director,
           editYear: response.year,
@@ -88,19 +99,19 @@ class App extends Component {
 
   handleESubmit = (e) => {
     e.preventDefault()
-    fetch(`https://omdb-son.herokuapp.com/${this.props.editMovie}`, {
-      method: 'PUT',
-      headers: {
-          'content-type': 'application/json',
-      },
+    fetch(`https://omdb-son.herokuapp.com/${this.state.id}`, {
+      method: "PUT",
+      headers: new Headers({
+          "content-type": "application/json",
+      }),
       body: JSON.stringify({
         title: this.state.editTitle,
         director: this.state.editDirector,
-        year: this.state.editYear,
-        my_rating: this.state.editRating,
-        poster_url: this.state.editPoster
-        })
+        year: Number(this.state.editYear),
+        my_rating:  Number(this.state.editRating),
+        poster_URL: this.state.editPoster,
       })
+    })
       console.log('you submit the PUT request')
   }
 
@@ -127,7 +138,7 @@ class App extends Component {
       <div className='router'>
           <Navbar />
           <Route exact path='/' component={Home}/>
-          <Route path='/NewMovie' render={() => <NewMovie handleSubmit={this.handleSubmit} />} />
+          <Route path='/NewMovie' render={() => <NewMovie handleChange={this.handleChange} handleSubmit={this.handleSubmit} />} />
           <Route path='/MovieList' render={() => <MovieList deleteMovie={this.deleteMovie} selectMovie={this.selectMovie} allMovies={this.state.movies} />} />
           <Route path='/EditPage' render={() => <EditPage editLoaded={this.state.editLoaded} handleChange={this.handleChange} handleESubmit={this.handleESubmit} editMovie={this.state.editMovie}/>} />
       </div>
