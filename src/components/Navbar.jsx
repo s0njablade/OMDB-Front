@@ -22,12 +22,12 @@ const Navbar = (props) => {
                     </li>
                 </ul>
             </div>
-            <div className="searchField">
+            {/* <div className="searchField">
                 <form className="form-inline">
                     <input className="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search" />
                     <button type="button" className="btn btn-secondary btn-sm">Search</button>
                 </form>
-            </div>
+            </div> */}
         </nav>
 
     )
