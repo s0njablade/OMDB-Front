@@ -14,10 +14,12 @@ class MovieList extends Component {
                     <div className='tableRow'>{movies.year}</div>
                     <div className='tableRow'>{movies.my_rating}</div>
                     <div className='tableRow'><img className='img' src={movies.poster_URL} /></div>
+                    <div className='buttons'>
                     <Link to='/EditPage'>
                         <button className='tableRow edit' id={movies.id} onClick={this.props.selectMovie}>Edit</button>
                     </Link>
                     <button className='tableRow delete' id={movies.id} onClick={this.props.deleteMovie}>Delete</button>
+                    </div>
                 </div>
             )
         })

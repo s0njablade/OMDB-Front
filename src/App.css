@@ -66,10 +66,13 @@
   width: 45px
 }
 
-.edit {
-  /* display: flex;
+.buttons{
+  display: flex;
   justify-content: center;
-  align-content: center; */
+  align-content: center;
+}
+.edit {
+
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   text-align: center;
