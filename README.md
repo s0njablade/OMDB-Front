@@ -10,9 +10,6 @@ MovieCRUD is a full stack application created that allows you to create movie re
 * [MovieCRUD Back-End Repository](https://github.com/s0njablade/OMBD-Backend/) - MovieCRUD Back-End Github Repository
 
 ### Prerequisites
-
-What things you need to install the software and how to install them
-https://omdb-sonja-front.firebaseapp.com/
 * [NPM]
 * [Node.js]
 
